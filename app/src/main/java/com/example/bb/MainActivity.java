@@ -2,6 +2,14 @@ package com.example.bb;
 
 
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.os.Bundle;
+import android.view.View;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 import android.os.Bundle;
 import android.widget.LinearLayout;
 import android.view.View;
@@ -40,7 +48,9 @@ public class MainActivity extends Activity implements OnClickListener{
         String pdfUrl = "https://www.data.jma.go.jp/fcd/yoho/data/jishin/kaisetsu_tanki_latest.pdf";
         String url = "http://docs.google.com/gview?embedded=true&url=" + pdfUrl;
 
+        //webview.invalidate();
         webview.loadUrl(url);
+        //webview.loadUrl("");
 
         webview.setWebViewClient(new WebViewClient() {
             boolean checkOnPageStartedCalled = false;
@@ -53,23 +63,50 @@ public class MainActivity extends Activity implements OnClickListener{
             @Override
             public void onPageFinished(WebView view, String url) {
                 if (checkOnPageStartedCalled) {
-                    pdfView.loadUrl(removePdfTopIcon);
-                    hideProgress();
+                    //pdfView.loadUrl(removePdfTopIcon);
+                    //hideProgress();
                 } else {
-                    showPdfFile(imageString);
+                    //showPdfFile(imageString);
+                    //showPdfFile(url);
+                    showPdfFile(pdfUrl);
                 }
             }
-        });
 
+        });
 
     }
 
     private LinearLayout.LayoutParams createParam(int w, int h){
         return new LinearLayout.LayoutParams(w, h);
     }
-
     public void onClick(View v) {
         SpannableStringBuilder url = (SpannableStringBuilder)textUrl.getText();
         webview.loadUrl(url.toString());
+    }
+
+    private void showPdfFile(final String imageString) {
+        //showProgress();
+        webview.invalidate();
+        webview.getSettings().setJavaScriptEnabled(true);
+        webview.getSettings().setSupportZoom(true);
+        webview.loadUrl("http://docs.google.com/gview?embedded=true&url=" + imageString);
+        webview.setWebViewClient(new WebViewClient() {
+            boolean checkOnPageStartedCalled = false;
+
+            @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                checkOnPageStartedCalled = true;
+            }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                if (checkOnPageStartedCalled) {
+                    //webview.loadUrl(removePdfTopIcon);
+                    //hideProgress();
+                } else {
+                    showPdfFile(imageString);
+                }
+            }
+        });
     }
 }
