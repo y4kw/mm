@@ -25,8 +25,8 @@ import android.webkit.WebViewClient;
 public class MainActivity extends Activity implements OnClickListener{
 //public class Test02_01 extends Activity implements OnClickListener{
 
-    private final int FP = ViewGroup.LayoutParams.FILL_PARENT;
-    private final int WC = ViewGroup.LayoutParams.WRAP_CONTENT;
+    //private final int FP = ViewGroup.LayoutParams.FILL_PARENT;
+    //private final int WC = ViewGroup.LayoutParams.WRAP_CONTENT;
 
     private EditText textUrl;
     private Button buttonGo;
@@ -44,6 +44,7 @@ public class MainActivity extends Activity implements OnClickListener{
 
 
         webview.getSettings().setJavaScriptEnabled(true);
+        webview.getSettings().setBuiltInZoomControls(true);
 
         String pdfUrl = "https://www.data.jma.go.jp/fcd/yoho/data/jishin/kaisetsu_tanki_latest.pdf";
         String url = "http://docs.google.com/gview?embedded=true&url=" + pdfUrl;
@@ -88,7 +89,7 @@ public class MainActivity extends Activity implements OnClickListener{
         //showProgress();
         webview.invalidate();
         webview.getSettings().setJavaScriptEnabled(true);
-        webview.getSettings().setSupportZoom(true);
+        //webview.getSettings().setSupportZoom(true);
         webview.loadUrl("http://docs.google.com/gview?embedded=true&url=" + imageString);
         webview.setWebViewClient(new WebViewClient() {
             boolean checkOnPageStartedCalled = false;
