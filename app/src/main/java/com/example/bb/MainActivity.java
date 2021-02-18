@@ -39,7 +39,6 @@ public class MainActivity extends Activity implements OnClickListener{
 
         //WebView webview = (WebView) findViewById(R.id.webView1);
         webview = (WebView) findViewById(R.id.webView1);
-        //webview = new WebView(this);
 
 
 
@@ -51,7 +50,6 @@ public class MainActivity extends Activity implements OnClickListener{
 
         //webview.invalidate();
         webview.loadUrl(url);
-        //webview.loadUrl("");
 
         webview.setWebViewClient(new WebViewClient() {
             boolean checkOnPageStartedCalled = false;
@@ -67,9 +65,7 @@ public class MainActivity extends Activity implements OnClickListener{
                     //pdfView.loadUrl(removePdfTopIcon);
                     //hideProgress();
                 } else {
-                    //showPdfFile(imageString);
-                    //showPdfFile(url);
-                    showPdfFile(pdfUrl);
+                    showPdfFile(url);
                 }
             }
 
@@ -85,12 +81,12 @@ public class MainActivity extends Activity implements OnClickListener{
         webview.loadUrl(url.toString());
     }
 
-    private void showPdfFile(final String imageString) {
+    private void showPdfFile(final String urlString) {
         //showProgress();
         webview.invalidate();
         webview.getSettings().setJavaScriptEnabled(true);
         //webview.getSettings().setSupportZoom(true);
-        webview.loadUrl("http://docs.google.com/gview?embedded=true&url=" + imageString);
+        webview.loadUrl(urlString);
         webview.setWebViewClient(new WebViewClient() {
             boolean checkOnPageStartedCalled = false;
 
@@ -105,7 +101,7 @@ public class MainActivity extends Activity implements OnClickListener{
                     //webview.loadUrl(removePdfTopIcon);
                     //hideProgress();
                 } else {
-                    showPdfFile(imageString);
+                    showPdfFile(urlString);
                 }
             }
         });
