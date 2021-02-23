@@ -1,5 +1,7 @@
 package com.example.bb;
 
+import com.example.bb.BuildConfig;
+import android.os.Build;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
@@ -42,10 +44,15 @@ public class MainActivity extends Activity implements OnClickListener{
 
 
 
-        webview.getSettings().setJavaScriptEnabled(true);
-        webview.getSettings().setBuiltInZoomControls(true);
-        webview.getSettings().setDisplayZoomControls(false);
-        //webview.getSettings().setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);.
+         //if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT){
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB){
+            webview.getSettings().setJavaScriptEnabled(true);
+            webview.getSettings().setBuiltInZoomControls(true);
+            webview.getSettings().setDisplayZoomControls(false);
+        }
+        //webview.getSettings().setJavaScriptEnabled(true);
+        //webview.getSettings().setBuiltInZoomControls(true);
+        //webview.getSettings().setDisplayZoomControls(false);
 
         String pdfUrl = "https://www.data.jma.go.jp/fcd/yoho/data/jishin/kaisetsu_tanki_latest.pdf";
         String url = "http://docs.google.com/gview?embedded=true&url=" + pdfUrl;
@@ -64,9 +71,12 @@ public class MainActivity extends Activity implements OnClickListener{
             @Override
             public void onPageFinished(WebView view, String url) {
                 if (checkOnPageStartedCalled) {
+                    android.util.Log.d("onPageFinished", "" + Thread.currentThread().getStackTrace()[2].getLineNumber() );
                     //pdfView.loadUrl(removePdfTopIcon);
                     //hideProgress();
+                    //showPdfFile(url);
                 } else {
+                    android.util.Log.d("onPageFinished", "" + Thread.currentThread().getStackTrace()[2].getLineNumber() );
                     showPdfFile(url);
                 }
             }
@@ -86,7 +96,9 @@ public class MainActivity extends Activity implements OnClickListener{
     private void showPdfFile(final String urlString) {
         //showProgress();
         //webview.invalidate();
-        webview.getSettings().setJavaScriptEnabled(true);
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB){
+            webview.getSettings().setJavaScriptEnabled(true);
+        }
         //webview.getSettings().setSupportZoom(true);
         //webview.getSettings().setDisplayZoomControls(false);
         webview.loadUrl(urlString);
@@ -101,9 +113,11 @@ public class MainActivity extends Activity implements OnClickListener{
             @Override
             public void onPageFinished(WebView view, String url) {
                 if (checkOnPageStartedCalled) {
+                    android.util.Log.d("onPageFinished", "" + Thread.currentThread().getStackTrace()[2].getLineNumber() );
                     //webview.loadUrl(removePdfTopIcon);
                     //hideProgress();
                 } else {
+                    android.util.Log.d("onPageFinished", "" + Thread.currentThread().getStackTrace()[2].getLineNumber() );
                     showPdfFile(urlString);
                 }
             }
