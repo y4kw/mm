@@ -85,10 +85,10 @@ public class MainActivity extends Activity implements OnClickListener{
 
     private void showPdfFile(final String urlString) {
         //showProgress();
-        webview.invalidate();
+        //webview.invalidate();
         webview.getSettings().setJavaScriptEnabled(true);
         //webview.getSettings().setSupportZoom(true);
-        webview.getSettings().setDisplayZoomControls(false);
+        //webview.getSettings().setDisplayZoomControls(false);
         webview.loadUrl(urlString);
         webview.setWebViewClient(new WebViewClient() {
             boolean checkOnPageStartedCalled = false;
