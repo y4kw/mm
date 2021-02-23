@@ -44,6 +44,8 @@ public class MainActivity extends Activity implements OnClickListener{
 
         webview.getSettings().setJavaScriptEnabled(true);
         webview.getSettings().setBuiltInZoomControls(true);
+        webview.getSettings().setDisplayZoomControls(false);
+        //webview.getSettings().setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);.
 
         String pdfUrl = "https://www.data.jma.go.jp/fcd/yoho/data/jishin/kaisetsu_tanki_latest.pdf";
         String url = "http://docs.google.com/gview?embedded=true&url=" + pdfUrl;
@@ -86,6 +88,7 @@ public class MainActivity extends Activity implements OnClickListener{
         webview.invalidate();
         webview.getSettings().setJavaScriptEnabled(true);
         //webview.getSettings().setSupportZoom(true);
+        webview.getSettings().setDisplayZoomControls(false);
         webview.loadUrl(urlString);
         webview.setWebViewClient(new WebViewClient() {
             boolean checkOnPageStartedCalled = false;
