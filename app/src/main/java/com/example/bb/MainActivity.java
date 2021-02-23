@@ -6,6 +6,7 @@ import android.os.Build;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -30,9 +31,13 @@ public class MainActivity extends Activity implements OnClickListener{
     //private final int FP = ViewGroup.LayoutParams.FILL_PARENT;
     //private final int WC = ViewGroup.LayoutParams.WRAP_CONTENT;
 
+    boolean checkOnPageStartedCalled = false;
     private EditText textUrl;
     private Button buttonGo;
     private WebView webview;
+
+    public static int reloaded = 0;
+    public static int reloadmax;
 
     @Override protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
@@ -46,13 +51,13 @@ public class MainActivity extends Activity implements OnClickListener{
 
          //if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT){
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB){
-            webview.getSettings().setJavaScriptEnabled(true);
-            webview.getSettings().setBuiltInZoomControls(true);
-            webview.getSettings().setDisplayZoomControls(false);
+            reloadmax = 0;
+        } else {
+            reloadmax = 5;
         }
-        //webview.getSettings().setJavaScriptEnabled(true);
-        //webview.getSettings().setBuiltInZoomControls(true);
-        //webview.getSettings().setDisplayZoomControls(false);
+        webview.getSettings().setJavaScriptEnabled(true);
+        webview.getSettings().setBuiltInZoomControls(true);
+        webview.getSettings().setDisplayZoomControls(false);
 
         String pdfUrl = "https://www.data.jma.go.jp/fcd/yoho/data/jishin/kaisetsu_tanki_latest.pdf";
         String url = "http://docs.google.com/gview?embedded=true&url=" + pdfUrl;
@@ -70,14 +75,21 @@ public class MainActivity extends Activity implements OnClickListener{
 
             @Override
             public void onPageFinished(WebView view, String url) {
-                if (checkOnPageStartedCalled) {
-                    android.util.Log.d("onPageFinished", "" + Thread.currentThread().getStackTrace()[2].getLineNumber() );
-                    //pdfView.loadUrl(removePdfTopIcon);
-                    //hideProgress();
-                    //showPdfFile(url);
-                } else {
-                    android.util.Log.d("onPageFinished", "" + Thread.currentThread().getStackTrace()[2].getLineNumber() );
-                    showPdfFile(url);
+                //boolean reloaded = false;
+
+                //SystemClock.sleep(1000);
+                if (reloaded <= reloadmax) {
+                    if (checkOnPageStartedCalled) {
+                        android.util.Log.d("onPageFinished", "" + Thread.currentThread().getStackTrace()[2].getLineNumber());
+                        //pdfView.loadUrl(removePdfTopIcon);
+                        //checkOnPageStartedCalled = false;
+                        //SystemClock.sleep(1000);
+                        webview.reload();
+                        reloaded++;
+                    } else {
+                        android.util.Log.d("onPageFinished", "" + Thread.currentThread().getStackTrace()[2].getLineNumber());
+                        showPdfFile(url);
+                    }
                 }
             }
 
@@ -116,6 +128,7 @@ public class MainActivity extends Activity implements OnClickListener{
                     android.util.Log.d("onPageFinished", "" + Thread.currentThread().getStackTrace()[2].getLineNumber() );
                     //webview.loadUrl(removePdfTopIcon);
                     //hideProgress();
+                    //checkOnPageStartedCalled = false;
                 } else {
                     android.util.Log.d("onPageFinished", "" + Thread.currentThread().getStackTrace()[2].getLineNumber() );
                     showPdfFile(urlString);
