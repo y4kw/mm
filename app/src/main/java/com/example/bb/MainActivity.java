@@ -78,12 +78,12 @@ public class MainActivity extends Activity implements OnClickListener{
                 //SystemClock.sleep(1000);
                 if (reloaded <= reloadmax) {
                     if (checkOnPageStartedCalled == true) {
-                        android.util.Log.d("onPageFinished", "" + Thread.currentThread().getStackTrace()[2].getLineNumber());
+                        android.util.Log.d("MYDEBUG", "" + Thread.currentThread().getStackTrace()[2].getLineNumber());
                         //SystemClock.sleep(1000);
                         webview.reload();
                         reloaded++;
                     } else {
-                        android.util.Log.d("onPageFinished", "" + Thread.currentThread().getStackTrace()[2].getLineNumber());
+                        android.util.Log.d("MYDEBUG", "" + Thread.currentThread().getStackTrace()[2].getLineNumber());
                         showPdfFile(url);
                     }
                 }
@@ -102,6 +102,7 @@ public class MainActivity extends Activity implements OnClickListener{
     }
 
     public void onResume() {
+        android.util.Log.d("MYDEBUG", "" + Thread.currentThread().getStackTrace()[2].getLineNumber());
         super.onResume();
         webview.reload();
     }
@@ -127,12 +128,12 @@ public class MainActivity extends Activity implements OnClickListener{
                 //SystemClock.sleep(1000);
                 if (reloaded <= reloadmax) {
                     if (checkOnPageStartedCalled == true) {
-                        android.util.Log.d("onPageFinished", "" + Thread.currentThread().getStackTrace()[2].getLineNumber());
+                        android.util.Log.d("MYDEBUG", "" + Thread.currentThread().getStackTrace()[2].getLineNumber());
                         //SystemClock.sleep(1000);
                         webview.reload();
                         reloaded++;
                     } else {
-                        android.util.Log.d("onPageFinished", "" + Thread.currentThread().getStackTrace()[2].getLineNumber());
+                        android.util.Log.d("MYDEBUG", "" + Thread.currentThread().getStackTrace()[2].getLineNumber());
                         showPdfFile(url);
                     }
                 }
