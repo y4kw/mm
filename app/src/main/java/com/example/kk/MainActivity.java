@@ -1,28 +1,18 @@
-package com.example.bb;
+package com.example.kk;
 
-import com.example.bb.BuildConfig;
 import android.os.Build;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.Toast;
-import android.os.Bundle;
 import android.widget.LinearLayout;
-import android.view.View;
-import android.view.ViewGroup;
-import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.view.View.OnClickListener;
 import android.text.SpannableStringBuilder;
-import android.webkit.WebViewClient;
 
 //public class MainActivity extends AppCompatActivity {
 public class MainActivity extends Activity implements OnClickListener{
