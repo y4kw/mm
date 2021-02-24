@@ -37,7 +37,7 @@ public class MainActivity extends Activity implements OnClickListener{
     private WebView webview;
 
     public static int reloaded = 0;
-    public static int reloadmax = 1;
+    public final int reloadmax = 4;
 
     //if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.HONEYCOMB){
     //    reloadmax = 0;
@@ -81,8 +81,7 @@ public class MainActivity extends Activity implements OnClickListener{
             @Override
             public void onPageFinished(WebView view, String url) {
                 //SystemClock.sleep(1000);
-                //if (reloaded <= reloadmax) {
-                if (reloaded <= 3) {
+                if (reloaded < reloadmax) {
                     if (checkOnPageStartedCalled == true) {
                         android.util.Log.d("MYDEBUG", "" + Thread.currentThread().getStackTrace()[2].getLineNumber());
                         //SystemClock.sleep(1000);
@@ -135,7 +134,6 @@ public class MainActivity extends Activity implements OnClickListener{
             @Override
             public void onPageFinished(WebView view, String url) {
                 //SystemClock.sleep(1000);
-                //if (reloaded <= reloadmax) {
                 if (reloaded <= 0) {
                     if (checkOnPageStartedCalled == true) {
                         android.util.Log.d("MYDEBUG", "" + Thread.currentThread().getStackTrace()[2].getLineNumber());
