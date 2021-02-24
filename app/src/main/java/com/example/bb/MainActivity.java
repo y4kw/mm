@@ -75,14 +75,10 @@ public class MainActivity extends Activity implements OnClickListener{
 
             @Override
             public void onPageFinished(WebView view, String url) {
-                //boolean reloaded = false;
-
                 //SystemClock.sleep(1000);
                 if (reloaded <= reloadmax) {
-                    if (checkOnPageStartedCalled) {
+                    if (checkOnPageStartedCalled == true) {
                         android.util.Log.d("onPageFinished", "" + Thread.currentThread().getStackTrace()[2].getLineNumber());
-                        //pdfView.loadUrl(removePdfTopIcon);
-                        //checkOnPageStartedCalled = false;
                         //SystemClock.sleep(1000);
                         webview.reload();
                         reloaded++;
@@ -105,6 +101,10 @@ public class MainActivity extends Activity implements OnClickListener{
         webview.loadUrl(url.toString());
     }
 
+    public void onResume() {
+        super.onResume();
+        webview.reload();
+    }
     private void showPdfFile(final String urlString) {
         //showProgress();
         //webview.invalidate();
@@ -124,16 +124,20 @@ public class MainActivity extends Activity implements OnClickListener{
 
             @Override
             public void onPageFinished(WebView view, String url) {
-                if (checkOnPageStartedCalled) {
-                    android.util.Log.d("onPageFinished", "" + Thread.currentThread().getStackTrace()[2].getLineNumber() );
-                    //webview.loadUrl(removePdfTopIcon);
-                    //hideProgress();
-                    //checkOnPageStartedCalled = false;
-                } else {
-                    android.util.Log.d("onPageFinished", "" + Thread.currentThread().getStackTrace()[2].getLineNumber() );
-                    showPdfFile(urlString);
+                //SystemClock.sleep(1000);
+                if (reloaded <= reloadmax) {
+                    if (checkOnPageStartedCalled == true) {
+                        android.util.Log.d("onPageFinished", "" + Thread.currentThread().getStackTrace()[2].getLineNumber());
+                        //SystemClock.sleep(1000);
+                        webview.reload();
+                        reloaded++;
+                    } else {
+                        android.util.Log.d("onPageFinished", "" + Thread.currentThread().getStackTrace()[2].getLineNumber());
+                        showPdfFile(url);
+                    }
                 }
             }
+
         });
     }
 }
