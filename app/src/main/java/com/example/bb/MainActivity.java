@@ -26,7 +26,6 @@ import android.webkit.WebViewClient;
 
 //public class MainActivity extends AppCompatActivity {
 public class MainActivity extends Activity implements OnClickListener{
-//public class Test02_01 extends Activity implements OnClickListener{
 
     //private final int FP = ViewGroup.LayoutParams.FILL_PARENT;
     //private final int WC = ViewGroup.LayoutParams.WRAP_CONTENT;
@@ -133,6 +132,7 @@ public class MainActivity extends Activity implements OnClickListener{
 
             @Override
             public void onPageFinished(WebView view, String url) {
+                android.util.Log.d("MYDEBUG", "" + Thread.currentThread().getStackTrace()[2].getLineNumber());
                 //SystemClock.sleep(1000);
                 if (reloaded <= 0) {
                     if (checkOnPageStartedCalled == true) {
@@ -140,6 +140,8 @@ public class MainActivity extends Activity implements OnClickListener{
                         //SystemClock.sleep(1000);
                         webview.reload();
                         reloaded++;
+                        android.util.Log.d("MYDEBUG", "" + Thread.currentThread().getStackTrace()[2].getLineNumber()
+                                + "   " + reloaded);
                     } else {
                         android.util.Log.d("MYDEBUG", "" + Thread.currentThread().getStackTrace()[2].getLineNumber());
                         showPdfFile(url);
