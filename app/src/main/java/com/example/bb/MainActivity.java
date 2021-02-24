@@ -37,9 +37,15 @@ public class MainActivity extends Activity implements OnClickListener{
     private WebView webview;
 
     public static int reloaded = 0;
-    public static int reloadmax;
+    public static int reloadmax = 1;
 
+    //if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.HONEYCOMB){
+    //    reloadmax = 0;
+    //} else {
+    //    reloadmax = 5;
+    //}
     @Override protected void onCreate(Bundle icicle) {
+        android.util.Log.d("MYDEBUG", "" + Thread.currentThread().getStackTrace()[2].getLineNumber());
         super.onCreate(icicle);
 
         setContentView(R.layout.activity_main);
@@ -49,12 +55,11 @@ public class MainActivity extends Activity implements OnClickListener{
 
 
 
-         //if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT){
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB){
-            reloadmax = 0;
-        } else {
-            reloadmax = 5;
-        }
+        //if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.HONEYCOMB){
+        //    reloadmax = 0;
+        //} else {
+        //    reloadmax = 5;
+        //}
         webview.getSettings().setJavaScriptEnabled(true);
         webview.getSettings().setBuiltInZoomControls(true);
         webview.getSettings().setDisplayZoomControls(false);
@@ -76,12 +81,15 @@ public class MainActivity extends Activity implements OnClickListener{
             @Override
             public void onPageFinished(WebView view, String url) {
                 //SystemClock.sleep(1000);
-                if (reloaded <= reloadmax) {
+                //if (reloaded <= reloadmax) {
+                if (reloaded <= 3) {
                     if (checkOnPageStartedCalled == true) {
                         android.util.Log.d("MYDEBUG", "" + Thread.currentThread().getStackTrace()[2].getLineNumber());
                         //SystemClock.sleep(1000);
                         webview.reload();
                         reloaded++;
+                        android.util.Log.d("MYDEBUG", "" + Thread.currentThread().getStackTrace()[2].getLineNumber()
+                                + "   " + reloaded);
                     } else {
                         android.util.Log.d("MYDEBUG", "" + Thread.currentThread().getStackTrace()[2].getLineNumber());
                         showPdfFile(url);
@@ -97,6 +105,7 @@ public class MainActivity extends Activity implements OnClickListener{
         return new LinearLayout.LayoutParams(w, h);
     }
     public void onClick(View v) {
+        android.util.Log.d("MYDEBUG", "" + Thread.currentThread().getStackTrace()[2].getLineNumber());
         SpannableStringBuilder url = (SpannableStringBuilder)textUrl.getText();
         webview.loadUrl(url.toString());
     }
@@ -126,7 +135,8 @@ public class MainActivity extends Activity implements OnClickListener{
             @Override
             public void onPageFinished(WebView view, String url) {
                 //SystemClock.sleep(1000);
-                if (reloaded <= reloadmax) {
+                //if (reloaded <= reloadmax) {
+                if (reloaded <= 0) {
                     if (checkOnPageStartedCalled == true) {
                         android.util.Log.d("MYDEBUG", "" + Thread.currentThread().getStackTrace()[2].getLineNumber());
                         //SystemClock.sleep(1000);
