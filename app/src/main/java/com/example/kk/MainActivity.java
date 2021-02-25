@@ -33,7 +33,8 @@ public class MainActivity extends Activity implements OnClickListener{
     //} else {
     //    reloadmax = 5;
     //}
-    @Override protected void onCreate(Bundle icicle) {
+    @Override
+    protected void onCreate(Bundle icicle) {
         android.util.Log.d("MYDEBUG", "" + Thread.currentThread().getStackTrace()[2].getLineNumber());
         super.onCreate(icicle);
 
