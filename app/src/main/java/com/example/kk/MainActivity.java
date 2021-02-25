@@ -34,9 +34,9 @@ public class MainActivity extends Activity implements OnClickListener{
     //    reloadmax = 5;
     //}
     @Override
-    protected void onCreate(Bundle icicle) {
+    protected void onCreate(Bundle savedInstanceState) {
         android.util.Log.d("MYDEBUG", "" + Thread.currentThread().getStackTrace()[2].getLineNumber());
-        super.onCreate(icicle);
+        super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
 
