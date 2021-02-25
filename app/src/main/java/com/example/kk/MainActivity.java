@@ -37,9 +37,13 @@ public class MainActivity extends Activity implements OnClickListener{
     protected void onCreate(Bundle savedInstanceState) {
         android.util.Log.d("MYDEBUG", "" + Thread.currentThread().getStackTrace()[2].getLineNumber());
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
 
+        if (savedInstanceState == null) {
+            android.util.Log.d("MYDEBUG", "" + Thread.currentThread().getStackTrace()[2].getLineNumber());
+        } else {
+            android.util.Log.d("MYDEBUG", "" + Thread.currentThread().getStackTrace()[2].getLineNumber());
+        }
         //WebView webview = (WebView) findViewById(R.id.webView1);
         webview = (WebView) findViewById(R.id.webView1);
 
@@ -84,6 +88,12 @@ public class MainActivity extends Activity implements OnClickListener{
                         showPdfFile(url);
                     }
                 }
+            }
+
+            @Override
+            public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+                super.onReceivedError(view, errorCode, description, failingUrl);
+                android.util.Log.d("MYDEBUG", "" + Thread.currentThread().getStackTrace()[2].getLineNumber());
             }
 
         });
@@ -138,6 +148,12 @@ public class MainActivity extends Activity implements OnClickListener{
                         showPdfFile(url);
                     }
                 }
+            }
+
+            @Override
+            public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+                super.onReceivedError(view, errorCode, description, failingUrl);
+                android.util.Log.d("MYDEBUG", "" + Thread.currentThread().getStackTrace()[2].getLineNumber());
             }
 
         });
