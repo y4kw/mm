@@ -1,6 +1,7 @@
 package com.example.kk;
 
 import android.os.Build;
+import android.os.SystemClock;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
@@ -13,6 +14,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.view.View.OnClickListener;
 import android.text.SpannableStringBuilder;
+import java.lang.Object;
+import java.util.concurrent.TimeUnit;
+
+import java.util.concurrent.TimeUnit;
 
 
 //public class MainActivity extends AppCompatActivity {
@@ -25,7 +30,12 @@ public class MainActivity extends Activity implements OnClickListener{
                 //+ Thread.currentThread().getStackTrace()[3].getClassName() + " "
                 + Thread.currentThread().getStackTrace()[3].getMethodName() + " " + str);
     }
-
+    //boolean shouldOverrideUrlLoading (WebView view, String url) {
+    //    //if (url.eqauls("some://app.request/")) {
+    //    //    return true;
+    //    //}
+    //    return false;
+    //}
     boolean checkOnPageStartedCalled = false;
     private EditText textUrl;
     private Button buttonGo;
@@ -68,8 +78,14 @@ public class MainActivity extends Activity implements OnClickListener{
             boolean checkOnPageStartedCalled = false;
 
             @Override
+            public boolean shouldOverrideUrlLoading (WebView view, String url) {
+                return false;
+            }
+
+            @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 d();
+                SystemClock.sleep(9000);
                 checkOnPageStartedCalled = true;
             }
 
@@ -83,6 +99,7 @@ public class MainActivity extends Activity implements OnClickListener{
                         //webview.reload();
                         reloaded++;
                         d("checkOnPageStartedCalled==true reloaded=" + String.valueOf(reloaded));
+                        checkOnPageStartedCalled = false;
                     } else {
                         showPdfFile(url);
                         d("NOTcheckOnPageStartedCalled==true");
