@@ -21,12 +21,10 @@ public class MainActivity extends Activity implements OnClickListener{
     public void d(String... message) {
         String str = String.join(", ", message);
         android.util.Log.d("MYDEBUG", ""
-                + String.format("%1$4d", Thread.currentThread().getStackTrace()[3].getLineNumber()) + " "
+                + String.format("%1$3d", Thread.currentThread().getStackTrace()[3].getLineNumber()) + " "
                 //+ Thread.currentThread().getStackTrace()[3].getClassName() + " "
                 + Thread.currentThread().getStackTrace()[3].getMethodName() + " " + str);
     }
-    //private final int FP = ViewGroup.LayoutParams.FILL_PARENT;
-    //private final int WC = ViewGroup.LayoutParams.WRAP_CONTENT;
 
     boolean checkOnPageStartedCalled = false;
     private EditText textUrl;
@@ -43,14 +41,14 @@ public class MainActivity extends Activity implements OnClickListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //android.util.Log.d("MYDEBUG", "" + Thread.currentThread().getStackTrace()[2].getLineNumber());
+        d();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         if (savedInstanceState == null) {
-            //android.util.Log.d("MYDEBUG", "" + Thread.currentThread().getStackTrace()[2].getLineNumber());
+            d("savedInstanceState", "null");
         } else {
-            //android.util.Log.d("MYDEBUG", "" + Thread.currentThread().getStackTrace()[2].getLineNumber());
+            d("savedInstanceState", "not null");
         }
         //WebView webview = (WebView) findViewById(R.id.webView1);
         webview = (WebView) findViewById(R.id.webView1);
