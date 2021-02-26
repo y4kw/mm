@@ -19,7 +19,7 @@ import android.text.SpannableStringBuilder;
 public class MainActivity extends Activity implements OnClickListener{
 
     public void d(String... message) {
-        String str = String.join(", ", message);
+        String str = String.join(" ", message);
         android.util.Log.d("MYDEBUG", ""
                 + String.format("%1$3d", Thread.currentThread().getStackTrace()[3].getLineNumber()) + " "
                 //+ Thread.currentThread().getStackTrace()[3].getClassName() + " "
@@ -32,12 +32,8 @@ public class MainActivity extends Activity implements OnClickListener{
     private WebView webview;
 
     public static int reloaded = 0;
+    //public int reloadmax = 4;
     public final int reloadmax = 4;
-    //if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.HONEYCOMB){
-    //    reloadmax = 0;
-    //} else {
-    //    reloadmax = 5;
-    //}
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,20 +42,19 @@ public class MainActivity extends Activity implements OnClickListener{
         setContentView(R.layout.activity_main);
 
         if (savedInstanceState == null) {
-            d("savedInstanceState", "null");
+            d("savedInstanceState:", "null");
         } else {
-            d("savedInstanceState", "not null");
+            d("savedInstanceState:", "not null");
         }
         //WebView webview = (WebView) findViewById(R.id.webView1);
         webview = (WebView) findViewById(R.id.webView1);
-
-
 
         //if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.HONEYCOMB){
         //    reloadmax = 0;
         //} else {
         //    reloadmax = 5;
         //}
+
         webview.getSettings().setJavaScriptEnabled(true);
         webview.getSettings().setBuiltInZoomControls(true);
         webview.getSettings().setDisplayZoomControls(false);
@@ -67,7 +62,6 @@ public class MainActivity extends Activity implements OnClickListener{
         String pdfUrl = "https://www.data.jma.go.jp/fcd/yoho/data/jishin/kaisetsu_tanki_latest.pdf";
         String url = "http://docs.google.com/gview?embedded=true&url=" + pdfUrl;
 
-        //webview.invalidate();
         webview.loadUrl(url);
 
         webview.setWebViewClient(new WebViewClient() {
@@ -75,11 +69,13 @@ public class MainActivity extends Activity implements OnClickListener{
 
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                d();
                 checkOnPageStartedCalled = true;
             }
 
             @Override
             public void onPageFinished(WebView view, String url) {
+                d();
                 //SystemClock.sleep(1000);
                 if (reloaded < reloadmax) {
                     if (checkOnPageStartedCalled == true) {
