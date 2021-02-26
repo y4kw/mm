@@ -1,23 +1,18 @@
 package com.example.kk;
 
-import android.os.Build;
-import android.os.SystemClock;
-
 import android.app.Activity;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.SystemClock;
+import android.text.SpannableStringBuilder;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.LinearLayout;
 import android.widget.Button;
 import android.widget.EditText;
-import android.view.View.OnClickListener;
-import android.text.SpannableStringBuilder;
-import java.lang.Object;
-import java.util.concurrent.TimeUnit;
-
-import java.util.concurrent.TimeUnit;
+import android.widget.LinearLayout;
 
 
 //public class MainActivity extends AppCompatActivity {
@@ -30,20 +25,16 @@ public class MainActivity extends Activity implements OnClickListener{
                 //+ Thread.currentThread().getStackTrace()[3].getClassName() + " "
                 + Thread.currentThread().getStackTrace()[3].getMethodName() + " " + str);
     }
+
     //boolean shouldOverrideUrlLoading (WebView view, String url) {
-    //    //if (url.eqauls("some://app.request/")) {
-    //    //    return true;
-    //    //}
     //    return false;
     //}
-    boolean checkOnPageStartedCalled = false;
-    private EditText textUrl;
-    private Button buttonGo;
+
     private WebView webview;
 
     public static int reloaded = 0;
-    //public int reloadmax = 4;
-    public final int reloadmax = 4;
+    //public int reloadmax = 5;
+    public final int reloadmax = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,26 +76,29 @@ public class MainActivity extends Activity implements OnClickListener{
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 d();
-                SystemClock.sleep(9000);
+                //SystemClock.sleep(1000);
                 checkOnPageStartedCalled = true;
+                //reloaded--;
             }
 
             @Override
             public void onPageFinished(WebView view, String url) {
-                d();
+                d("everreloaded=" + String.valueOf(reloaded));
                 //SystemClock.sleep(1000);
-                //if (reloaded < reloadmax) {
+                if (reloaded < reloadmax) {
                     if (checkOnPageStartedCalled == true) {
-                        //SystemClock.sleep(1000);
-                        //webview.reload();
+                        webview.reload();
+                        reloaded++;
+                        SystemClock.sleep(1000);
+                        webview.reload();
                         reloaded++;
                         d("checkOnPageStartedCalled==true reloaded=" + String.valueOf(reloaded));
-                        checkOnPageStartedCalled = false;
+                        //checkOnPageStartedCalled = false;
                     } else {
                         showPdfFile(url);
                         d("NOTcheckOnPageStartedCalled==true");
                     }
-                //}
+                }
             }
 
             @Override
@@ -117,25 +111,23 @@ public class MainActivity extends Activity implements OnClickListener{
 
     }
 
-    private LinearLayout.LayoutParams createParam(int w, int h){
-        return new LinearLayout.LayoutParams(w, h);
-    }
+    //private LinearLayout.LayoutParams createParam(int w, int h){
+    //    return new LinearLayout.LayoutParams(w, h);
+    //}
+
     public void onClick(View v) {
-        //android.util.Log.d("MYDEBUG", "" + Thread.currentThread().getStackTrace()[2].getLineNumber());
-        SpannableStringBuilder url = (SpannableStringBuilder)textUrl.getText();
-        webview.loadUrl(url.toString());
+        d();
+        //SpannableStringBuilder url = (SpannableStringBuilder)textUrl.getText();
+        //webview.loadUrl(url.toString());
     }
 
     public void onResume() {
-        //android.util.Log.d("MYDEBUG", "" + Thread.currentThread().getStackTrace()[2].getLineNumber());
         super.onResume();
-        webview.reload();
+        d();
     }
 
     private void showPdfFile(final String urlString) {
         d();
-        //showProgress();
-        //webview.invalidate();
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB){
             webview.getSettings().setJavaScriptEnabled(true);
         }
