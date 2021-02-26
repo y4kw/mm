@@ -19,7 +19,7 @@ import android.text.SpannableStringBuilder;
 public class MainActivity extends Activity implements OnClickListener{
 
     public void d(String... message) {
-        String str = String.join(" ", message);
+        String str = String.join("\t", message);
         android.util.Log.d("MYDEBUG", ""
                 + String.format("%1$3d", Thread.currentThread().getStackTrace()[3].getLineNumber()) + " "
                 //+ Thread.currentThread().getStackTrace()[3].getClassName() + " "
@@ -42,9 +42,9 @@ public class MainActivity extends Activity implements OnClickListener{
         setContentView(R.layout.activity_main);
 
         if (savedInstanceState == null) {
-            d("savedInstanceState:", "null");
+            d("savedInstanceState==null");
         } else {
-            d("savedInstanceState:", "not null");
+            d("NOTsavedInstanceState==null");
         }
         //WebView webview = (WebView) findViewById(R.id.webView1);
         webview = (WebView) findViewById(R.id.webView1);
@@ -83,6 +83,7 @@ public class MainActivity extends Activity implements OnClickListener{
                         //SystemClock.sleep(1000);
                         webview.reload();
                         reloaded++;
+                        d();
 //                        android.util.Log.d("MYDEBUG", "" + Thread.currentThread().getStackTrace()[2].getLineNumber()
 //                                + "   " + reloaded);
                     } else {
@@ -146,13 +147,11 @@ public class MainActivity extends Activity implements OnClickListener{
                         reloaded++;
 //                        android.util.Log.d("MYDEBUG", "" + Thread.currentThread().getStackTrace()[2].getLineNumber()
 //                                + "   " + reloaded);
-                        d("reloaded", String.valueOf(reloaded));
+                        //d("reloaded=" + String.valueOf(reloaded));
+                        d("checkOnPageStartedCalled==true reloaded=" + String.valueOf(reloaded));
                     } else {
-                        //android.util.Log.d("MYDEBUG", "" + Thread.currentThread().getStackTrace()[2].getLineNumber());
-                        //d("Hello", "world");
-                        //d("Hello");
-                        d();
                         showPdfFile(url);
+                        d("NOTcheckOnPageStartedCalled==true");
                     }
                 }
             }
