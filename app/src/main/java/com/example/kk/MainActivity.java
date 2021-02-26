@@ -77,26 +77,23 @@ public class MainActivity extends Activity implements OnClickListener{
             public void onPageFinished(WebView view, String url) {
                 d();
                 //SystemClock.sleep(1000);
-                if (reloaded < reloadmax) {
+                //if (reloaded < reloadmax) {
                     if (checkOnPageStartedCalled == true) {
-                        //android.util.Log.d("MYDEBUG", "" + Thread.currentThread().getStackTrace()[2].getLineNumber());
                         //SystemClock.sleep(1000);
-                        webview.reload();
+                        //webview.reload();
                         reloaded++;
-                        d();
-//                        android.util.Log.d("MYDEBUG", "" + Thread.currentThread().getStackTrace()[2].getLineNumber()
-//                                + "   " + reloaded);
+                        d("checkOnPageStartedCalled==true reloaded=" + String.valueOf(reloaded));
                     } else {
-                        //android.util.Log.d("MYDEBUG", "" + Thread.currentThread().getStackTrace()[2].getLineNumber());
                         showPdfFile(url);
+                        d("NOTcheckOnPageStartedCalled==true");
                     }
-                }
+                //}
             }
 
             @Override
             public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
                 super.onReceivedError(view, errorCode, description, failingUrl);
-                //android.util.Log.d("MYDEBUG", "" + Thread.currentThread().getStackTrace()[2].getLineNumber());
+                d();
             }
 
         });
@@ -119,6 +116,7 @@ public class MainActivity extends Activity implements OnClickListener{
     }
 
     private void showPdfFile(final String urlString) {
+        d();
         //showProgress();
         //webview.invalidate();
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB){
@@ -132,22 +130,18 @@ public class MainActivity extends Activity implements OnClickListener{
 
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                d();
                 checkOnPageStartedCalled = true;
             }
 
             @Override
             public void onPageFinished(WebView view, String url) {
-                //android.util.Log.d("MYDEBUG", "" + Thread.currentThread().getStackTrace()[2].getLineNumber());
                 //SystemClock.sleep(1000);
                 if (reloaded <= 0) {
                     if (checkOnPageStartedCalled == true) {
-                        //android.util.Log.d("MYDEBUG", "" + Thread.currentThread().getStackTrace()[2].getLineNumber());
                         //SystemClock.sleep(1000);
                         webview.reload();
                         reloaded++;
-//                        android.util.Log.d("MYDEBUG", "" + Thread.currentThread().getStackTrace()[2].getLineNumber()
-//                                + "   " + reloaded);
-                        //d("reloaded=" + String.valueOf(reloaded));
                         d("checkOnPageStartedCalled==true reloaded=" + String.valueOf(reloaded));
                     } else {
                         showPdfFile(url);
@@ -155,11 +149,11 @@ public class MainActivity extends Activity implements OnClickListener{
                     }
                 }
             }
-            //private void d(String... message) {
+
             @Override
             public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
                 super.onReceivedError(view, errorCode, description, failingUrl);
-                //android.util.Log.d("MYDEBUG", "" + Thread.currentThread().getStackTrace()[2].getLineNumber());
+                d();
             }
 
         });
