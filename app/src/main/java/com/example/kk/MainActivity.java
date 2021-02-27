@@ -34,7 +34,7 @@ public class MainActivity extends Activity implements OnClickListener{
 
     public static int reloaded = 0;
     //public int reloadmax = 5;
-    public final int reloadmax = 4;
+    public final int reloadmax = -4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +48,6 @@ public class MainActivity extends Activity implements OnClickListener{
             d("NOTsavedInstanceState==null");
         }
 
-        Button button = findViewById(R.id.button);
 
         //WebView webview = (WebView) findViewById(R.id.webView1);
         webview = (WebView) findViewById(R.id.webView1);
@@ -66,7 +65,17 @@ public class MainActivity extends Activity implements OnClickListener{
         String pdfUrl = "https://www.data.jma.go.jp/fcd/yoho/data/jishin/kaisetsu_tanki_latest.pdf";
         String url = "http://docs.google.com/gview?embedded=true&url=" + pdfUrl;
 
+        d();
         webview.loadUrl(url);
+
+        Button button = findViewById(R.id.button);
+        button.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                d();
+                //webview.reload();
+                webview.loadUrl(url);
+            }
+        });
 
         webview.setWebViewClient(new WebViewClient() {
             boolean checkOnPageStartedCalled = false;
