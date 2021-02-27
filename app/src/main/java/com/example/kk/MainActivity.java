@@ -34,7 +34,7 @@ public class MainActivity extends Activity implements OnClickListener{
 
     public static int reloaded = 0;
     //public int reloadmax = 5;
-    public final int reloadmax = 5;
+    public final int reloadmax = 4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +47,9 @@ public class MainActivity extends Activity implements OnClickListener{
         } else {
             d("NOTsavedInstanceState==null");
         }
+
+        Button button = findViewById(R.id.button);
+
         //WebView webview = (WebView) findViewById(R.id.webView1);
         webview = (WebView) findViewById(R.id.webView1);
 
@@ -78,6 +81,7 @@ public class MainActivity extends Activity implements OnClickListener{
                 d();
                 //SystemClock.sleep(1000);
                 checkOnPageStartedCalled = true;
+                //SystemClock.sleep(10000);
                 //reloaded--;
             }
 
@@ -87,11 +91,12 @@ public class MainActivity extends Activity implements OnClickListener{
                 //SystemClock.sleep(1000);
                 if (reloaded < reloadmax) {
                     if (checkOnPageStartedCalled == true) {
-                        webview.reload();
+                        //webview.reload();
                         reloaded++;
-                        SystemClock.sleep(1000);
-                        webview.reload();
-                        reloaded++;
+                        SystemClock.sleep(1000*reloaded);
+                        //webview.reload();
+                        //webview.loadUrl(url);
+                        webview.loadUrl("javascript:window.location.reload( true )");
                         d("checkOnPageStartedCalled==true reloaded=" + String.valueOf(reloaded));
                         //checkOnPageStartedCalled = false;
                     } else {
