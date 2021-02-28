@@ -1,18 +1,19 @@
-package com.example.kk;
+package com.example.ll;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
-import android.text.SpannableStringBuilder;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.LinearLayout;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+//import android.support.design.widget.FloatingActionButton;
+import android.view.View;
+import android.widget.Toast;
 
 
 //public class MainActivity extends AppCompatActivity {
@@ -69,6 +70,10 @@ public class MainActivity extends Activity implements OnClickListener{
         webview.loadUrl(url);
 
         Button button = findViewById(R.id.button);
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        //val fab: View =  findViewById(R.id.fab);
+
         button.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 d();

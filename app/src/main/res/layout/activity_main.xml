@@ -32,4 +32,27 @@
         android:text="REFRESH"
         />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:src="@android:drawable/ic_menu_share"
+        android:layout_margin="16dp" />
+
+    <!-- android:contentDescription="@string/submit" -->
+    <!--
+    <android.support.design.widget.FloatingActionButton
+        android:src="@drawable/ic_my_icon"
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/ic_menu_star"
+        app:backgroundTint="@color/white"
+        />
+-->
 </RelativeLayout>
