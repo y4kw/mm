@@ -1,6 +1,7 @@
 package com.example.ll;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.http.HttpResponseCache;
@@ -10,6 +11,7 @@ import android.os.SystemClock;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.ScaleAnimation;
+import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -17,6 +19,8 @@ import android.widget.Button;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 //import android.support.design.widget.FloatingActionButton;
 import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
@@ -66,11 +70,15 @@ public class MainActivity extends Activity implements OnClickListener{
         //    reloadmax = 5;
         //}
 
+        webview.requestFocus();
+        webview.getSettings().setLightTouchEnabled(true);
         webview.getSettings().setJavaScriptEnabled(true);
         webview.getSettings().setBuiltInZoomControls(true);
         webview.getSettings().setDisplayZoomControls(false);
+        //webview.getSettings().setRenderPriority(WebSettings.RenderPriority.HIGH);
 
-        webview.getSettings().setDomStorageEnabled(true);
+
+        //webview.getSettings().setDomStorageEnabled(true);
 
         //// Set cache size to 8 mb by default. should be more than enough
         //webview.getSettings().setAppCacheMaxSize(1024*1024*8);
@@ -84,21 +92,10 @@ public class MainActivity extends Activity implements OnClickListener{
         ////webview.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT);
         webview.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
 
-        //try {
-        //
-        //    File httpCacheDir = new File(context.getCacheDir(), "http");
-        //    long httpCacheSize = 10 * 1024 * 1024; // 10 MiB
-        //    HttpResponseCache.install(httpCacheDir, httpCacheSize);
-        //} catch (IOException e) {
-        //    android.util.Log.d("MYDEBUG", "HTTP response cache installation failed:" + e);
-        //}
 
+        //String pdfUrl = "https://www.glump.net/_media/howto/desktop/vim-graphical-cheat-sheet-and-tutorial/vi-vim-cheat-sheet-and-tutorial.pdf";
 
-
-
-        String pdfUrl = "https://www.glump.net/_media/howto/desktop/vim-graphical-cheat-sheet-and-tutorial/vi-vim-cheat-sheet-and-tutorial.pdf";
-
-        //String pdfUrl = "https://www.data.jma.go.jp/fcd/yoho/data/jishin/kaisetsu_tanki_latest.pdf";
+        String pdfUrl = "https://www.data.jma.go.jp/fcd/yoho/data/jishin/kaisetsu_tanki_latest.pdf";
         String url = "https://docs.google.com/gview?embedded=true&url=" + pdfUrl;
 
         d();
@@ -107,7 +104,11 @@ public class MainActivity extends Activity implements OnClickListener{
         //Button button = findViewById(R.id.button);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-
+        ProgressDialog loading = new ProgressDialog(this);
+        loading.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        //loading.setMessage("onPageStarted");
+        //final TextView txtview = (TextView)findViewById(R.id.tV1);
+        //final ProgressBar pbar = (ProgressBar) findViewById(R.id.pB1);
         //ScaleAnimation anim = new ScaleAnimation(0,1,0,1);
         //anim.setFillBefore(true);
         //anim.setFillAfter(true);
@@ -125,6 +126,25 @@ public class MainActivity extends Activity implements OnClickListener{
         });
 
         webview.setWebViewClient(new WebViewClient() {
+
+            //@Override
+            //public void onProogressChanged(WebView view, int progress) {
+            //    super.onProgressChanged(view, progress);
+            //    d();
+            //    if(progress < 100 && pbar.getVisibility() == ProgressBar.GONE){
+            //        pbar.setVisibility(ProgressBar.VISIBLE);
+            //        txtview.setVisibility(View.VISIBLE);
+            //        d("progress==", String.valueOf(progress));
+            //    }
+
+            //    pbar.setProgress(progress);
+            //    if(progress == 100) {
+            //        pbar.setVisibility(ProgressBar.GONE);
+            //        txtview.setVisibility(View.GONE);
+            //    }
+            //}
+
+
             boolean checkOnPageStartedCalled = false;
 
             @Override
@@ -134,15 +154,18 @@ public class MainActivity extends Activity implements OnClickListener{
 
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                loading.show();
                 d();
                 //SystemClock.sleep(1000);
                 checkOnPageStartedCalled = true;
+                //loading.show();
                 //SystemClock.sleep(10000);
                 //reloaded--;
             }
 
             @Override
             public void onPageFinished(WebView view, String url) {
+                loading.dismiss();
                 d("everreloaded=" + String.valueOf(reloaded));
                 //SystemClock.sleep(1000);
                 if (reloaded < reloadmax) {
@@ -161,6 +184,14 @@ public class MainActivity extends Activity implements OnClickListener{
                     }
                 }
             }
+
+            @Override
+            public WebResourceResponse shouldInterceptRequest(WebView view, String url) {
+                super.shouldInterceptRequest(view, url);
+                //d();
+                return null;
+            }
+
 
             @Override
             public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
