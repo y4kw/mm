@@ -1,13 +1,16 @@
 package com.example.ll;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Bitmap;
+import android.net.http.HttpResponseCache;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.ScaleAnimation;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
@@ -15,6 +18,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 //import android.support.design.widget.FloatingActionButton;
 import android.view.View;
 import android.widget.Toast;
+
+import java.io.File;
+import java.io.IOException;
 
 
 //public class MainActivity extends AppCompatActivity {
@@ -64,25 +70,53 @@ public class MainActivity extends Activity implements OnClickListener{
         webview.getSettings().setBuiltInZoomControls(true);
         webview.getSettings().setDisplayZoomControls(false);
 
-        String pdfUrl = "https://www.data.jma.go.jp/fcd/yoho/data/jishin/kaisetsu_tanki_latest.pdf";
-        String url = "http://docs.google.com/gview?embedded=true&url=" + pdfUrl;
+        webview.getSettings().setDomStorageEnabled(true);
+
+        //// Set cache size to 8 mb by default. should be more than enough
+        //webview.getSettings().setAppCacheMaxSize(1024*1024*8);
+
+        //// This next one is crazy. It's the DEFAULT location for your app's cache
+        //// But it didn't work for me without this line
+        //webview.getSettings().setAppCachePath("/data/data/"+ getPackageName() +"/cache");
+        //webview.getSettings().setAllowFileAccess(true);
+        //webview.getSettings().setAppCacheEnabled(true);
+
+        ////webview.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT);
+        webview.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
+
+        //try {
+        //
+        //    File httpCacheDir = new File(context.getCacheDir(), "http");
+        //    long httpCacheSize = 10 * 1024 * 1024; // 10 MiB
+        //    HttpResponseCache.install(httpCacheDir, httpCacheSize);
+        //} catch (IOException e) {
+        //    android.util.Log.d("MYDEBUG", "HTTP response cache installation failed:" + e);
+        //}
+
+
+
+
+        String pdfUrl = "https://www.glump.net/_media/howto/desktop/vim-graphical-cheat-sheet-and-tutorial/vi-vim-cheat-sheet-and-tutorial.pdf";
+
+        //String pdfUrl = "https://www.data.jma.go.jp/fcd/yoho/data/jishin/kaisetsu_tanki_latest.pdf";
+        String url = "https://docs.google.com/gview?embedded=true&url=" + pdfUrl;
 
         d();
         webview.loadUrl(url);
 
-        Button button = findViewById(R.id.button);
+        //Button button = findViewById(R.id.button);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        //fab.setAlpha(0.45f);
-        ScaleAnimation anim = new ScaleAnimation(0,1,0,1);
-        anim.setFillBefore(true);
-        anim.setFillAfter(true);
-        anim.setFillEnabled(true);
-        anim.setDuration(300);
-        //anim.setInterpolator(new OvershootInterpolator());
-        fab.startAnimation(anim);
 
-        button.setOnClickListener(new OnClickListener() {
+        //ScaleAnimation anim = new ScaleAnimation(0,1,0,1);
+        //anim.setFillBefore(true);
+        //anim.setFillAfter(true);
+        //anim.setFillEnabled(true);
+        //anim.setDuration(300);
+        ////anim.setInterpolator(new OvershootInterpolator());
+        //fab.startAnimation(anim);
+
+        fab.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 d();
                 //webview.reload();

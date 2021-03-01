@@ -21,6 +21,7 @@
         android:layout_height="match_parent"
         android:layout_weight="1" />
 
+    <!--
     <Button
         android:id="@+id/button"
         android:layout_width="fill_parent"
@@ -29,6 +30,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:text="REFRESH" />
+     -->
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:alpha="0.33"
