@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-<!--
+    <!--
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -15,41 +15,48 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
         -->
-    <WebView  xmlns:android="http://schemas.android.com/apk/res/android"
+    <WebView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/webView1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        />
+        android:layout_weight="1" />
 
     <Button
         android:id="@+id/button"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:text="REFRESH"
-        />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="REFRESH" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:alpha="0.33"
+        android:focusable="true"
         android:id="@+id/fab"
-        style="@style/Widget.MaterialComponents.FloatingActionButton"
-        android:layout_width="wrap_content"
+        android:layout_gravity="end|bottom"
         android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_width="wrap_content"
+        android:src="@android:drawable/stat_notify_sync_noanim"
         app:backgroundTint="@android:color/holo_blue_bright"
         app:fabCustomSize="90dp"
-        android:src="@android:drawable/ic_menu_share"
-        app:rippleColor="@android:color/holo_blue_dark"
-        android:layout_gravity="end|bottom"
-        android:focusable="true"
         app:maxImageSize="60dp"
-        android:layout_margin="16dp"
+        app:rippleColor="@android:color/black"
+        app:useCompatPadding="false"
         />
 
-<!--
+    <!--
+    <animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+       android:oneshot="false">
+       <item android:drawable="@drawable/stat_notify_sync" android:duration="500"/>
+       <item android:drawable="@drawable/stat_notify_sync_anim0" android:duration="500"/>
+    </animation-list>
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
+        app:fabCustomSize="90dp"
+        app:maxImageSize="60dp"
+        style="@style/Widget.MaterialComponents.FloatingActionButton"
         android:layout_gravity="end|bottom"
         android:layout_width="212dp"
         android:layout_height="212dp"

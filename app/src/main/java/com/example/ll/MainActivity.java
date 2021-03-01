@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.animation.ScaleAnimation;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
@@ -72,7 +73,14 @@ public class MainActivity extends Activity implements OnClickListener{
         Button button = findViewById(R.id.button);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setAlpha(0.45f);
+        //fab.setAlpha(0.45f);
+        ScaleAnimation anim = new ScaleAnimation(0,1,0,1);
+        anim.setFillBefore(true);
+        anim.setFillAfter(true);
+        anim.setFillEnabled(true);
+        anim.setDuration(300);
+        //anim.setInterpolator(new OvershootInterpolator());
+        fab.startAnimation(anim);
 
         button.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
