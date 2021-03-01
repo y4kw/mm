@@ -72,7 +72,7 @@ public class MainActivity extends Activity implements OnClickListener{
         Button button = findViewById(R.id.button);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setAlpha(0.25f);
+        fab.setAlpha(0.45f);
 
         button.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
