@@ -11,6 +11,7 @@ import android.os.SystemClock;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.ScaleAnimation;
+import android.webkit.CookieManager;
 import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -22,6 +23,8 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.RequiresApi;
 
 import java.io.File;
 import java.io.IOException;
@@ -42,12 +45,18 @@ public class MainActivity extends Activity implements OnClickListener{
     //    return false;
     //}
 
+    //String pdfUrl = "https://www.glump.net/_media/howto/desktop/vim-graphical-cheat-sheet-and-tutorial/vi-vim-cheat-sheet-and-tutorial.pdf";
+
+    String pdfUrl = "https://www.data.jma.go.jp/fcd/yoho/data/jishin/kaisetsu_tanki_latest.pdf";
+    String url = "https://docs.google.com/gview?embedded=true&url=" + pdfUrl;
+
     private WebView webview;
 
     public static int reloaded = 0;
     //public int reloadmax = 5;
     public final int reloadmax = -4;
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         d();
@@ -60,6 +69,8 @@ public class MainActivity extends Activity implements OnClickListener{
             d("NOTsavedInstanceState==null");
         }
 
+        CookieManager.getInstance().removeAllCookies(null);
+        CookieManager.getInstance().flush();
 
         //WebView webview = (WebView) findViewById(R.id.webView1);
         webview = (WebView) findViewById(R.id.webView1);
@@ -76,27 +87,18 @@ public class MainActivity extends Activity implements OnClickListener{
         webview.getSettings().setBuiltInZoomControls(true);
         webview.getSettings().setDisplayZoomControls(false);
         //webview.getSettings().setRenderPriority(WebSettings.RenderPriority.HIGH);
-
-
         //webview.getSettings().setDomStorageEnabled(true);
-
         //// Set cache size to 8 mb by default. should be more than enough
         //webview.getSettings().setAppCacheMaxSize(1024*1024*8);
-
         //// This next one is crazy. It's the DEFAULT location for your app's cache
         //// But it didn't work for me without this line
         //webview.getSettings().setAppCachePath("/data/data/"+ getPackageName() +"/cache");
         //webview.getSettings().setAllowFileAccess(true);
         //webview.getSettings().setAppCacheEnabled(true);
-
         ////webview.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT);
         webview.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
 
 
-        //String pdfUrl = "https://www.glump.net/_media/howto/desktop/vim-graphical-cheat-sheet-and-tutorial/vi-vim-cheat-sheet-and-tutorial.pdf";
-
-        String pdfUrl = "https://www.data.jma.go.jp/fcd/yoho/data/jishin/kaisetsu_tanki_latest.pdf";
-        String url = "https://docs.google.com/gview?embedded=true&url=" + pdfUrl;
 
         d();
         webview.loadUrl(url);
@@ -105,6 +107,7 @@ public class MainActivity extends Activity implements OnClickListener{
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         ProgressDialog loading = new ProgressDialog(this);
+        //loading.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         loading.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         //loading.setMessage("onPageStarted");
         //final TextView txtview = (TextView)findViewById(R.id.tV1);
@@ -166,6 +169,7 @@ public class MainActivity extends Activity implements OnClickListener{
             @Override
             public void onPageFinished(WebView view, String url) {
                 loading.dismiss();
+                webview.clearCache(true);
                 d("everreloaded=" + String.valueOf(reloaded));
                 //SystemClock.sleep(1000);
                 if (reloaded < reloadmax) {
@@ -209,12 +213,12 @@ public class MainActivity extends Activity implements OnClickListener{
 
     public void onClick(View v) {
         d();
-        //SpannableStringBuilder url = (SpannableStringBuilder)textUrl.getText();
-        //webview.loadUrl(url.toString());
     }
 
     public void onResume() {
         super.onResume();
+        webview.loadUrl(url);
+        //webview.loadUrl("javascript:window.location.reload( true )");
         d();
     }
 
