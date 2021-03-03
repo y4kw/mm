@@ -1,11 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fillViewport="true"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-
-
 
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -55,20 +48,21 @@
      -->
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="55dp"
         android:alpha="0.33"
         android:focusable="true"
-        android:id="@+id/fab"
-        android:layout_gravity="end|bottom"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:layout_width="wrap_content"
         android:src="@android:drawable/stat_notify_sync_noanim"
         app:backgroundTint="@android:color/holo_blue_bright"
         app:fabCustomSize="90dp"
         app:maxImageSize="60dp"
         app:rippleColor="@android:color/black"
-        app:useCompatPadding="false"
-        />
+        app:useCompatPadding="false" />
 
     <!--
     <animation-list xmlns:android="http://schemas.android.com/apk/res/android"
@@ -108,4 +102,3 @@
         />
 -->
 </FrameLayout>
-</ScrollView>
