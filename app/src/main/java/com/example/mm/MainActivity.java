@@ -86,7 +86,10 @@ public class MainActivity extends Activity implements OnClickListener{
         webview.getSettings().setBuiltInZoomControls(true);
         webview.getSettings().setDisplayZoomControls(false);
         webview.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
-
+        //webview.setInitialScale(1);
+        webview.getSettings().setLoadWithOverviewMode(true);
+        webview.getSettings().setUseWideViewPort(true);
+        webview.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         d();
         webview.loadUrl(url);
 
