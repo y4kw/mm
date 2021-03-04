@@ -86,22 +86,24 @@ public class MainActivity extends Activity implements OnClickListener{
         webview.getSettings().setBuiltInZoomControls(true);
         webview.getSettings().setDisplayZoomControls(false);
         webview.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
+        webview.setVerticalScrollbarOverlay(true);
         //webview.setInitialScale(1);
-        webview.getSettings().setLoadWithOverviewMode(true);
-        webview.getSettings().setUseWideViewPort(true);
-        webview.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+        //webview.getSettings().setLoadWithOverviewMode(true);
+        //webview.getSettings().setUseWideViewPort(true);
+        //webview.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         d();
         webview.loadUrl(url);
 
         //Button button = findViewById(R.id.button);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         ProgressDialog loading = new ProgressDialog(this);
         //loading.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         loading.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         //loading.setMessage("onPageStarted");
 
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new OnClickListener() {
+
             public void onClick(View v) {
                 d();
                 //webview.reload();
@@ -129,14 +131,14 @@ public class MainActivity extends Activity implements OnClickListener{
             @Override
             public void onPageFinished(WebView view, String url) {
                 loading.dismiss();
-                webview.clearCache(true);
+                //webview.clearCache(true);
                 d("everreloaded=" + String.valueOf(reloaded));
                 //SystemClock.sleep(1000);
                 if (reloaded < reloadmax) {
                     if (checkOnPageStartedCalled == true) {
                         //webview.reload();
                         reloaded++;
-                        SystemClock.sleep(1000*reloaded);
+                        //SystemClock.sleep(1000*reloaded);
                         //webview.reload();
                         //webview.loadUrl(url);
                         webview.loadUrl("javascript:window.location.reload( true )");
@@ -172,7 +174,9 @@ public class MainActivity extends Activity implements OnClickListener{
     //}
 
     public void onClick(View v) {
-        d();
+        //webview.clearCache(false);
+        //SystemClock.sleep(5000);
+        //d();
     }
 
     public void onRestart() {
@@ -199,8 +203,8 @@ public class MainActivity extends Activity implements OnClickListener{
         //}
 
         super.onResume();
-        webview.loadUrl(url);
-        webview.clearCache(true);
+        //webview.loadUrl(url);
+        //webview.clearCache(true);
         //webview.loadUrl("javascript:window.location.reload( true )");
         d();
     }
