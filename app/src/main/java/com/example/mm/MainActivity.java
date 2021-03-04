@@ -102,14 +102,7 @@ public class MainActivity extends Activity implements OnClickListener{
         //loading.setMessage("onPageStarted");
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new OnClickListener() {
-
-            public void onClick(View v) {
-                d();
-                //webview.reload();
-                webview.loadUrl(url);
-            }
-        });
+        fab.setOnClickListener(this);
 
         webview.setWebViewClient(new WebViewClient() {
 
@@ -174,9 +167,10 @@ public class MainActivity extends Activity implements OnClickListener{
     //}
 
     public void onClick(View v) {
-        //webview.clearCache(false);
-        //SystemClock.sleep(5000);
-        //d();
+        webview.clearCache(false);
+        webview.loadUrl(url);
+        SystemClock.sleep(3000);
+        d();
     }
 
     public void onRestart() {
