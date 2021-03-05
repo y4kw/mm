@@ -53,14 +53,31 @@
         android:text="REFRESH" />
      -->
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="55dp"
+            android:alpha="0.33"
+            android:focusable="true"
+            android:src="@android:drawable/stat_notify_sync_noanim"
+            app:backgroundTint="@android:color/holo_blue_bright"
+            app:fabCustomSize="90dp"
+            app:maxImageSize="60dp"
+            app:rippleColor="@android:color/black"
+            app:useCompatPadding="false" />
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/fab1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginBottom="55dp"
+        android:layout_marginBottom="155dp"
         android:alpha="0.33"
         android:focusable="true"
         android:src="@android:drawable/stat_notify_sync_noanim"

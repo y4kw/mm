@@ -86,12 +86,15 @@ public class MainActivity extends Activity implements OnClickListener{
         webview.getSettings().setBuiltInZoomControls(true);
         webview.getSettings().setDisplayZoomControls(false);
         webview.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
+        webview.getSettings().setSupportZoom(true);
         ////good!
         webview.setVerticalScrollbarOverlay(true);
-        webview.setInitialScale(110);
+        //webview.setInitialScale(110);
         webview.getSettings().setUseWideViewPort(true);
         webview.getSettings().setLoadWithOverviewMode(true);
-        //webview.getSettings().setDefaultZoom(10.0);
+        //
+        webview.setVerticalScrollBarEnabled(true);
+        webview.setHorizontalScrollBarEnabled(true);
 
 
 
@@ -111,6 +114,8 @@ public class MainActivity extends Activity implements OnClickListener{
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(this);
+        FloatingActionButton fab1 = (FloatingActionButton) findViewById(R.id.fab1);
+        fab1.setOnClickListener(this);
 
         webview.setWebViewClient(new WebViewClient() {
 
@@ -132,7 +137,15 @@ public class MainActivity extends Activity implements OnClickListener{
             @Override
             public void onPageFinished(WebView view, String url) {
                 loading.dismiss();
+                super.onPageFinished(view, url);
+                //webview.postDelayed(new Runnable() {
+                //    @Override
+                //    public void run() {
+                //        webview.scrollTo(webview.getContentHeight(),webview.getContentHeight());
+                //    }
+                //}, 100);
                 //webview.clearCache(true);
+
                 d("everreloaded=" + String.valueOf(reloaded));
                 //SystemClock.sleep(1000);
                 if (reloaded < reloadmax) {
@@ -175,10 +188,23 @@ public class MainActivity extends Activity implements OnClickListener{
     //}
 
     public void onClick(View v) {
-        webview.clearCache(false);
-        webview.loadUrl(url);
-        SystemClock.sleep(1000);
-        d();
+        if (v.getId() == R.id.fab) {
+            webview.clearCache(false);
+            webview.loadUrl(url);
+            SystemClock.sleep(1000);
+            d();
+        }
+        if (v.getId() == R.id.fab1) {
+            //webview.loadUrl("javascript:window.location.reload( true )");
+            //webview.loadUrl("javascript:document.elementFromPoint(500,1206).click()");
+            webview.loadUrl("javascript:(function(){"+
+                    "l=document.getElementById('mA');"+
+                    "e=document.createEvent('HTMLEvents');"+
+                    "e.initEvent('click',true,true);"+
+                    "l.dispatchEvent(e);"+
+                    "})()");
+            //webview.scrollTo(webview.getContentHeight(),webview.getContentHeight());
+        }
     }
 
     public void onRestart() {
