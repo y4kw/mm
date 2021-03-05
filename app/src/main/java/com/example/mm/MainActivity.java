@@ -169,7 +169,7 @@ public class MainActivity extends Activity implements OnClickListener{
     public void onClick(View v) {
         webview.clearCache(false);
         webview.loadUrl(url);
-        SystemClock.sleep(3000);
+        SystemClock.sleep(6000);
         d();
     }
 
