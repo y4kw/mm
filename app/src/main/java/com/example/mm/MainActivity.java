@@ -80,13 +80,15 @@ public class MainActivity extends Activity implements OnClickListener{
         //    reloadmax = 5;
         //}
 
-        webview.requestFocus();
+        //webview.requestFocus();
         webview.getSettings().setLightTouchEnabled(true);
         webview.getSettings().setJavaScriptEnabled(true);
         webview.getSettings().setBuiltInZoomControls(true);
         webview.getSettings().setDisplayZoomControls(false);
         webview.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
-        webview.setVerticalScrollbarOverlay(true);
+        //webview.setVerticalScrollbarOverlay(true);
+
+
         //webview.setInitialScale(1);
         //webview.getSettings().setLoadWithOverviewMode(true);
         //webview.getSettings().setUseWideViewPort(true);
@@ -169,7 +171,7 @@ public class MainActivity extends Activity implements OnClickListener{
     public void onClick(View v) {
         webview.clearCache(false);
         webview.loadUrl(url);
-        SystemClock.sleep(6000);
+        SystemClock.sleep(1000);
         d();
     }
 
