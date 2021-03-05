@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="left" >
+
+    <FrameLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="1dp"
+    android:layout_gravity="left"
     tools:context=".MainActivity">
     <!--
     <TextView
@@ -21,10 +28,7 @@
         android:id="@+id/webView1"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_weight="1"
-        android:nestedScrollingEnabled="true"
         />
-
     <!--
     <TextView android:text="Loading, . . ."
         android:textAppearance="?android:attr/textAppearanceSmall"
@@ -104,3 +108,4 @@
         />
 -->
 </FrameLayout>
+</RelativeLayout>
