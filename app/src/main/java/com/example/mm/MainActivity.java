@@ -31,7 +31,6 @@ public class MainActivity extends Activity implements OnClickListener{
                 + Thread.currentThread().getStackTrace()[3].getMethodName() + " " + str);
     }
 
-
     //String pdfUrl = "https://www.glump.net/_media/howto/desktop/vim-graphical-cheat-sheet-and-tutorial/vi-vim-cheat-sheet-and-tutorial.pdf";
     String pdfUrl = "https://www.data.jma.go.jp/fcd/yoho/data/jishin/kaisetsu_tanki_latest.pdf";
     String url = "https://docs.google.com/gview?embedded=true&url=" + pdfUrl;
@@ -128,14 +127,13 @@ public class MainActivity extends Activity implements OnClickListener{
                 //    }
                 //}, 100);
                 //webview.clearCache(true);
-
-                log("everreloaded=" + String.valueOf(reloaded));
+                log("everreloaded=" + reloaded);
                 //SystemClock.sleep(1000);
                 if (reloaded < reloadmax) {
-                    if (checkOnPageStartedCalled == true) {
+                    if (checkOnPageStartedCalled) {
                         reloaded++;
                         webview.loadUrl("javascript:window.location.reload( true )");
-                        log("checkOnPageStartedCalled==true reloaded=" + String.valueOf(reloaded));
+                        log("checkOnPageStartedCalled==true reloaded=" + reloaded);
                     } else {
                         showPdfFile(url);
                         log("NOTcheckOnPageStartedCalled==true");
@@ -207,11 +205,11 @@ public class MainActivity extends Activity implements OnClickListener{
             public void onPageFinished(WebView view, String url) {
                 //SystemClock.sleep(1000);
                 if (reloaded <= 0) {
-                    if (checkOnPageStartedCalled == true) {
+                    if (checkOnPageStartedCalled) {
                         //SystemClock.sleep(1000);
                         webview.reload();
                         reloaded++;
-                        log("checkOnPageStartedCalled==true reloaded=" + String.valueOf(reloaded));
+                        log("checkOnPageStartedCalled==true reloaded=" + reloaded);
                     } else {
                         showPdfFile(url);
                         log("NOTcheckOnPageStartedCalled==true");
