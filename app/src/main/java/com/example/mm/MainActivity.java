@@ -90,8 +90,9 @@ public class MainActivity extends Activity implements OnClickListener{
         ////good!
         webview.setVerticalScrollbarOverlay(true);
         //webview.setInitialScale(110);
-        webview.getSettings().setUseWideViewPort(true);
-        webview.getSettings().setLoadWithOverviewMode(true);
+        webview.setInitialScale(300);
+        //webview.getSettings().setUseWideViewPort(true);
+        //webview.getSettings().setLoadWithOverviewMode(true);
         //
         webview.setVerticalScrollBarEnabled(true);
         webview.setHorizontalScrollBarEnabled(true);
