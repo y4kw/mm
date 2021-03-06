@@ -14,11 +14,14 @@ import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+
+import androidx.annotation.RequiresApi;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity extends Activity implements OnClickListener{
 
-    public void d(String... message) {
+    public void log(String... message) {
         String str = String.join("\t", message);
         android.util.Log.d("MYDEBUG", ""
                 + String.format("%1$3d", Thread.currentThread().getStackTrace()[3].getLineNumber()) + " "
@@ -39,14 +42,14 @@ public class MainActivity extends Activity implements OnClickListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        d();
+        log();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         if (savedInstanceState == null) {
-            d("savedInstanceState==null");
+            log("savedInstanceState==null");
         } else {
-            d("NOTsavedInstanceState==null");
+            log("NOTsavedInstanceState==null");
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             CookieManager.getInstance().removeAllCookies(null);
@@ -76,13 +79,15 @@ public class MainActivity extends Activity implements OnClickListener{
         webview.getSettings().setSupportZoom(true);
         webview.setVerticalScrollbarOverlay(true);
         webview.setInitialScale(300);
-        //webview.getSettings().setUseWideViewPort(true);
-        //webview.getSettings().setLoadWithOverviewMode(true);
+        webview.getSettings().setPluginState(WebSettings.PluginState.ON);
+        webview.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
+        webview.getSettings().setUseWideViewPort(false);
+        webview.getSettings().setLoadWithOverviewMode(false);
         //
         //webview.setVerticalScrollBarEnabled(true);
         //webview.setHorizontalScrollBarEnabled(true);
         //webview.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
-        d();
+        log();
         webview.loadUrl(url);
 
         ProgressDialog loading = new ProgressDialog(this);
@@ -105,7 +110,7 @@ public class MainActivity extends Activity implements OnClickListener{
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 loading.show();
-                d();
+                log();
                 //SystemClock.sleep(1000);
                 checkOnPageStartedCalled = true;
             }
@@ -122,16 +127,16 @@ public class MainActivity extends Activity implements OnClickListener{
                 //}, 100);
                 //webview.clearCache(true);
 
-                d("everreloaded=" + String.valueOf(reloaded));
+                log("everreloaded=" + String.valueOf(reloaded));
                 //SystemClock.sleep(1000);
                 if (reloaded < reloadmax) {
                     if (checkOnPageStartedCalled == true) {
                         reloaded++;
                         webview.loadUrl("javascript:window.location.reload( true )");
-                        d("checkOnPageStartedCalled==true reloaded=" + String.valueOf(reloaded));
+                        log("checkOnPageStartedCalled==true reloaded=" + String.valueOf(reloaded));
                     } else {
                         showPdfFile(url);
-                        d("NOTcheckOnPageStartedCalled==true");
+                        log("NOTcheckOnPageStartedCalled==true");
                     }
                 }
             }
@@ -139,14 +144,14 @@ public class MainActivity extends Activity implements OnClickListener{
             @Override
             public WebResourceResponse shouldInterceptRequest(WebView view, String url) {
                 super.shouldInterceptRequest(view, url);
-                //d();
+                //log();
                 return null;
             }
 
             @Override
             public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
                 super.onReceivedError(view, errorCode, description, failingUrl);
-                d();
+                log();
             }
 
         });
@@ -154,7 +159,7 @@ public class MainActivity extends Activity implements OnClickListener{
     }
 
     public void onClick(View v) {
-        d();
+        log();
         if (v.getId() == R.id.fab) {
             webview.clearCache(false);
             SystemClock.sleep(1000);
@@ -170,17 +175,17 @@ public class MainActivity extends Activity implements OnClickListener{
 
     public void onRestart() {
         super.onRestart();
-        d();
+        log();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        d();
+        log();
     }
 
     private void showPdfFile(final String urlString) {
-        d();
+        log();
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB){
             webview.getSettings().setJavaScriptEnabled(true);
         }
@@ -192,7 +197,7 @@ public class MainActivity extends Activity implements OnClickListener{
 
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
-                d();
+                log();
                 checkOnPageStartedCalled = true;
             }
 
@@ -204,10 +209,10 @@ public class MainActivity extends Activity implements OnClickListener{
                         //SystemClock.sleep(1000);
                         webview.reload();
                         reloaded++;
-                        d("checkOnPageStartedCalled==true reloaded=" + String.valueOf(reloaded));
+                        log("checkOnPageStartedCalled==true reloaded=" + String.valueOf(reloaded));
                     } else {
                         showPdfFile(url);
-                        d("NOTcheckOnPageStartedCalled==true");
+                        log("NOTcheckOnPageStartedCalled==true");
                     }
                 }
             }
@@ -215,7 +220,7 @@ public class MainActivity extends Activity implements OnClickListener{
             @Override
             public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
                 super.onReceivedError(view, errorCode, description, failingUrl);
-                d();
+                log();
             }
 
         });
