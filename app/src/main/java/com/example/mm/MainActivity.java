@@ -36,6 +36,7 @@ public class MainActivity extends Activity implements OnClickListener{
     //String pdfUrl = "https://www.glump.net/_media/howto/desktop/vim-graphical-cheat-sheet-and-tutorial/vi-vim-cheat-sheet-and-tutorial.pdf";
     String pdfUrl = "https://www.data.jma.go.jp/fcd/yoho/data/jishin/kaisetsu_tanki_latest.pdf";
     String url = "https://docs.google.com/gview?embedded=true&url=" + pdfUrl;
+    String url1= "https://www.jma.go.jp/bosai/map.html#contents=himawari";
 
     private WebView webview;
 
@@ -196,15 +197,12 @@ public class MainActivity extends Activity implements OnClickListener{
             d();
         }
         if (v.getId() == R.id.fab1) {
+            //webview.clearCache(false);
+            webview.loadUrl(url1);
+            SystemClock.sleep(1000);
+            d();
             //webview.loadUrl("javascript:window.location.reload( true )");
             //webview.loadUrl("javascript:document.elementFromPoint(500,1206).click()");
-            webview.loadUrl("javascript:(function(){"+
-                    "l=document.getElementById('mA');"+
-                    "e=document.createEvent('HTMLEvents');"+
-                    "e.initEvent('click',true,true);"+
-                    "l.dispatchEvent(e);"+
-                    "})()");
-            //webview.scrollTo(webview.getContentHeight(),webview.getContentHeight());
         }
     }
 

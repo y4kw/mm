@@ -13,47 +13,15 @@
     android:padding="1dp"
     android:layout_gravity="left"
     tools:context=".MainActivity">
-    <!--
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-        -->
+
     <WebView
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/webView1"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         />
-    <!--
-    <TextView android:text="Loading, . . ."
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:id="@+id/tV1" android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:textColor="#000000"
-        />
 
-    <ProgressBar android:id="@+id/pB1"
-        style="?android:attr/progressBarStyleHorizontal" android:layout_width="fill_parent"
-        android:layout_height="wrap_content" android:layout_centerVertical="true"
-        android:padding="2dip"
-        />
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:text="REFRESH" />
-     -->
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -87,42 +55,5 @@
         app:rippleColor="@android:color/black"
         app:useCompatPadding="false" />
 
-    <!--
-    <animation-list xmlns:android="http://schemas.android.com/apk/res/android"
-       android:oneshot="false">
-       <item android:drawable="@drawable/stat_notify_sync" android:duration="500"/>
-       <item android:drawable="@drawable/stat_notify_sync_anim0" android:duration="500"/>
-    </animation-list>
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        app:fabCustomSize="90dp"
-        app:maxImageSize="60dp"
-        style="@style/Widget.MaterialComponents.FloatingActionButton"
-        android:layout_gravity="end|bottom"
-        android:layout_width="212dp"
-        android:layout_height="212dp"
-        android:src="@android:drawable/ic_menu_share"
-        android:layout_margin="16dp" />
-        -->
-
-    <!-- android:contentDescription="@string/submit" -->
-    <!--
-    <android.support.design.widget.FloatingActionButton
-        android:src="@drawable/ic_my_icon"
-        android:scaleType="fitXY"
-        android:layout_gravity="end|bottom"
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:src="@drawable/ic_menu_star"
-        app:backgroundTint="@color/white"
-        />
--->
-</FrameLayout>
+     </FrameLayout>
 </RelativeLayout>
