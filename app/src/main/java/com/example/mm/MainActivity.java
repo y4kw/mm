@@ -1,5 +1,6 @@
 package com.example.mm;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.graphics.Bitmap;
@@ -15,11 +16,13 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import androidx.annotation.RequiresApi;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity extends Activity implements OnClickListener{
 
+    @TargetApi(Build.VERSION_CODES.O)
     public void log(String... message) {
         String str = String.join("\t", message);
         android.util.Log.d("MYDEBUG", ""
