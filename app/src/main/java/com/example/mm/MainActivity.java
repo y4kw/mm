@@ -15,6 +15,7 @@ import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -34,11 +35,12 @@ public class MainActivity extends Activity implements OnClickListener {
     @TargetApi(Build.VERSION_CODES.O)
     public void log(String... message) {
         String str = String.join("\t", message);
-        android.util.Log.d("MYDEBUG", ""
+        String msg = ""
                 + String.format("%1$3d",
                 Thread.currentThread().getStackTrace()[3].getLineNumber()) + " "
-                //+ Thread.currentThread().getStackTrace()[3].getClassName() + " "
-                + Thread.currentThread().getStackTrace()[3].getMethodName() + " " + str);
+                + Thread.currentThread().getStackTrace()[3].getMethodName() + " " + str;
+        android.util.Log.d("MYDEBUG", msg);
+        Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
     }
 
     @Override
