@@ -7,8 +7,8 @@ import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
-import android.view.View.OnClickListener;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.webkit.CookieManager;
 import android.webkit.CookieSyncManager;
 import android.webkit.WebResourceResponse;
@@ -16,30 +16,28 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import androidx.annotation.RequiresApi;
-
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class MainActivity extends Activity implements OnClickListener{
+public class MainActivity extends Activity implements OnClickListener {
+
+    public static int reloaded = 0;
+    public final int reloadmax = -4;
+    //String pdfUrl = "https://www.glump.net/_media/howto/desktop/vim-graphical-cheat-sheet-and
+    // -tutorial/vi-vim-cheat-sheet-and-tutorial.pdf";
+    String pdfUrl = "https://www.data.jma.go.jp/fcd/yoho/data/jishin/kaisetsu_tanki_latest.pdf";
+    String url = "https://docs.google.com/gview?embedded=true&url=" + pdfUrl;
+    String url1 = "https://www.jma.go.jp/bosai/map.html#contents=himawari";
+    private WebView webview;
 
     @TargetApi(Build.VERSION_CODES.O)
     public void log(String... message) {
         String str = String.join("\t", message);
         android.util.Log.d("MYDEBUG", ""
-                + String.format("%1$3d", Thread.currentThread().getStackTrace()[3].getLineNumber()) + " "
+                + String.format("%1$3d",
+                Thread.currentThread().getStackTrace()[3].getLineNumber()) + " "
                 //+ Thread.currentThread().getStackTrace()[3].getClassName() + " "
                 + Thread.currentThread().getStackTrace()[3].getMethodName() + " " + str);
     }
-
-    //String pdfUrl = "https://www.glump.net/_media/howto/desktop/vim-graphical-cheat-sheet-and-tutorial/vi-vim-cheat-sheet-and-tutorial.pdf";
-    String pdfUrl = "https://www.data.jma.go.jp/fcd/yoho/data/jishin/kaisetsu_tanki_latest.pdf";
-    String url = "https://docs.google.com/gview?embedded=true&url=" + pdfUrl;
-    String url1= "https://www.jma.go.jp/bosai/map.html#contents=himawari";
-
-    private WebView webview;
-
-    public static int reloaded = 0;
-    public final int reloadmax = -4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,9 +54,10 @@ public class MainActivity extends Activity implements OnClickListener{
             CookieManager.getInstance().removeAllCookies(null);
             CookieManager.getInstance().flush();
         } else {
-            CookieSyncManager cookieSyncMngr=CookieSyncManager.createInstance(getApplicationContext());
+            CookieSyncManager cookieSyncMngr =
+                    CookieSyncManager.createInstance(getApplicationContext());
             cookieSyncMngr.startSync();
-            CookieManager cookieManager=CookieManager.getInstance();
+            CookieManager cookieManager = CookieManager.getInstance();
             cookieManager.removeAllCookie();
             cookieManager.removeSessionCookie();
             cookieSyncMngr.stopSync();
@@ -104,7 +103,7 @@ public class MainActivity extends Activity implements OnClickListener{
             boolean checkOnPageStartedCalled = false;
 
             @Override
-            public boolean shouldOverrideUrlLoading (WebView view, String url) {
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 return false;
             }
 
@@ -149,7 +148,8 @@ public class MainActivity extends Activity implements OnClickListener{
             }
 
             @Override
-            public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+            public void onReceivedError(WebView view, int errorCode, String description,
+                                        String failingUrl) {
                 super.onReceivedError(view, errorCode, description, failingUrl);
                 log();
             }
@@ -186,7 +186,7 @@ public class MainActivity extends Activity implements OnClickListener{
 
     private void showPdfFile(final String urlString) {
         log();
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB){
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             webview.getSettings().setJavaScriptEnabled(true);
         }
         //webview.getSettings().setSupportZoom(true);
@@ -218,7 +218,8 @@ public class MainActivity extends Activity implements OnClickListener{
             }
 
             @Override
-            public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+            public void onReceivedError(WebView view, int errorCode, String description,
+                                        String failingUrl) {
                 super.onReceivedError(view, errorCode, description, failingUrl);
                 log();
             }
