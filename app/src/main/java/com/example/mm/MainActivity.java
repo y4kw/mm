@@ -25,8 +25,10 @@ public class MainActivity extends Activity implements OnClickListener {
     //String pdfUrl = "https://www.glump.net/_media/howto/desktop/vim-graphical-cheat-sheet-and
     // -tutorial/vi-vim-cheat-sheet-and-tutorial.pdf";
     String pdfUrl = "https://www.data.jma.go.jp/fcd/yoho/data/jishin/kaisetsu_tanki_latest.pdf";
-    String url = "https://docs.google.com/gview?embedded=true&url=" + pdfUrl;
-    String url1 = "https://www.jma.go.jp/bosai/map.html#contents=himawari";
+    String urlKaisetsu = "https://docs.google.com/gview?embedded=true&url=" + pdfUrl;
+    String urlHimawari = "https://www.jma.go.jp/bosai/map.html#contents=himawari";
+    public String url = urlKaisetsu;
+
     private WebView webview;
 
     @TargetApi(Build.VERSION_CODES.O)
@@ -45,11 +47,6 @@ public class MainActivity extends Activity implements OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if (savedInstanceState == null) {
-            log("savedInstanceState==null");
-        } else {
-            log("NOTsavedInstanceState==null");
-        }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             CookieManager.getInstance().removeAllCookies(null);
             CookieManager.getInstance().flush();
@@ -88,7 +85,13 @@ public class MainActivity extends Activity implements OnClickListener {
         //webview.setHorizontalScrollBarEnabled(true);
         //webview.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         log();
-        webview.loadUrl(url);
+        if (savedInstanceState == null) {
+            log("savedInstanceState==null");
+            url = urlKaisetsu;
+            webview.loadUrl(url);
+        } else {
+            log("NOTsavedInstanceState==null");
+        }
 
         ProgressDialog loading = new ProgressDialog(this);
         loading.setProgressStyle(ProgressDialog.STYLE_SPINNER);
@@ -162,26 +165,42 @@ public class MainActivity extends Activity implements OnClickListener {
         log();
         if (v.getId() == R.id.fab) {
             webview.clearCache(false);
+            url = urlKaisetsu;
             SystemClock.sleep(1000);
             webview.loadUrl(url);
             SystemClock.sleep(1000);
         }
         if (v.getId() == R.id.fab1) {
             webview.clearCache(false);
-            webview.loadUrl(url1);
+            url = urlHimawari;
+            webview.loadUrl(url);
             SystemClock.sleep(1000);
         }
     }
 
     public void onRestart() {
-        super.onRestart();
         log();
+        super.onRestart();
     }
 
     @Override
     public void onResume() {
-        super.onResume();
         log();
+        super.onResume();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        log();
+        super.onSaveInstanceState(outState);
+        webview.saveState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        log();
+        super.onRestoreInstanceState(savedInstanceState);
+        webview.restoreState(savedInstanceState);
     }
 
     private void showPdfFile(final String urlString) {
