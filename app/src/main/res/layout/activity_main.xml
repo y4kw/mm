@@ -10,9 +10,7 @@
     <WebView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/webView1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        />
+        android:layout_height="match_parent" />
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -48,5 +46,13 @@
         app:maxImageSize="60dp"
         app:rippleColor="@android:color/black"
         app:useCompatPadding="false" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme" />
 
 </FrameLayout>
