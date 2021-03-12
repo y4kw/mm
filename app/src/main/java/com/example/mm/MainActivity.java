@@ -82,16 +82,15 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         //}
 
         webview.getSettings().setJavaScriptEnabled(true);
-        webview.getSettings().setBuiltInZoomControls(true);
-        webview.getSettings().setDisplayZoomControls(false);
         webview.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
         webview.getSettings().setSupportZoom(true);
-        webview.setVerticalScrollbarOverlay(true);
-        webview.setInitialScale(300);
-        webview.getSettings().setPluginState(WebSettings.PluginState.ON);
-        webview.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
         webview.getSettings().setUseWideViewPort(false);
         webview.getSettings().setLoadWithOverviewMode(false);
+        webview.setInitialScale(300);
+        webview.getSettings().setBuiltInZoomControls(true);
+        webview.getSettings().setDisplayZoomControls(false);
+        webview.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
+        webview.getSettings().setPluginState(WebSettings.PluginState.ON);
         //
         //webview.setVerticalScrollBarEnabled(true);
         //webview.setHorizontalScrollBarEnabled(true);
