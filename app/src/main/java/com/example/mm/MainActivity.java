@@ -27,10 +27,23 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity implements OnClickListener{
+    private WebView webview;
     String pdfUrl = "http://www.data.jma.go.jp/fcd/yoho/data/jishin/kaisetsu_tanki_latest.pdf";
     String urlKaisetsu = "https://docs.google.com/gview?embedded=true&url=" + pdfUrl;
     String urlHimawari = "https://www.jma.go.jp/bosai/map.html#contents=himawari";
     public String url = urlKaisetsu;
+
+    @TargetApi(Build.VERSION_CODES.O)
+    public void log(String... message) {
+        String str = String.join("\t", message);
+        String msg = ""
+                + String.format("%1$3d",
+                Thread.currentThread().getStackTrace()[3].getLineNumber()) + " "
+                + Thread.currentThread().getStackTrace()[3].getMethodName() + " " + str;
+        android.util.Log.d("MYDEBUG", msg);
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +62,36 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
         //Intent intent = new Intent(this, SubActivity.class);
         //intent.putExtra("key", "value");
         //startActivity(intent);
+        webview = (WebView) findViewById(R.id.webView1);
+
+        //if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.HONEYCOMB){
+        //    reloadmax = 0;
+        //} else {
+        //    reloadmax = 5;
+        //}
+
+        webview.getSettings().setJavaScriptEnabled(true);
+        webview.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
+        webview.getSettings().setSupportZoom(true);
+        webview.getSettings().setUseWideViewPort(false);
+        webview.getSettings().setLoadWithOverviewMode(false);
+        webview.setInitialScale(300);
+        webview.getSettings().setBuiltInZoomControls(true);
+        webview.getSettings().setDisplayZoomControls(false);
+        webview.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
+        webview.getSettings().setPluginState(WebSettings.PluginState.ON);
+        //
+        //webview.setVerticalScrollBarEnabled(true);
+        //webview.setHorizontalScrollBarEnabled(true);
+        //webview.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+        log();
+        if (savedInstanceState == null) {
+            log("savedInstanceState==null");
+            url = urlKaisetsu;
+            webview.loadUrl(url);
+        } else {
+            log("NOTsavedInstanceState==null");
+        }
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(this);
         FloatingActionButton fab1 = (FloatingActionButton) findViewById(R.id.fab1);
