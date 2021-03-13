@@ -26,7 +26,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements OnClickListener{
     String pdfUrl = "http://www.data.jma.go.jp/fcd/yoho/data/jishin/kaisetsu_tanki_latest.pdf";
     String urlKaisetsu = "https://docs.google.com/gview?embedded=true&url=" + pdfUrl;
     String urlHimawari = "https://www.jma.go.jp/bosai/map.html#contents=himawari";
@@ -42,12 +42,20 @@ public class MainActivity extends AppCompatActivity {
         intent.setData(Uri.parse(pdfUrl));
         //intent.setType("application/pdf");
         //intent.setDataAndType(Uri.parse(pdfUrl), "application/pdf");
+        //finish();
         startActivity(intent);
         //startActivity(Intent.createChooser(intent, "Open file with"));
 
         //Intent intent = new Intent(this, SubActivity.class);
         //intent.putExtra("key", "value");
         //startActivity(intent);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(this);
+        FloatingActionButton fab1 = (FloatingActionButton) findViewById(R.id.fab1);
+        fab1.setOnClickListener(this);
+    }
+    public void onClick(View v) {
+        //log();
     }
 }
 /*
