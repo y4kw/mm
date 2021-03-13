@@ -1,5 +1,6 @@
 package com.example.mm;
 //mmm
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.app.Activity;
@@ -36,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
     @TargetApi(Build.VERSION_CODES.O)
     public void log(String... message) {
         String str = String.join("\t", message);
-        String msg = ""
+        @SuppressLint("DefaultLocale") String msg = ""
                 + String.format("%1$3d",
                 Thread.currentThread().getStackTrace()[3].getLineNumber()) + " "
                 + Thread.currentThread().getStackTrace()[3].getMethodName() + " " + str;
