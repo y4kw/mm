@@ -4,7 +4,9 @@ import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -24,7 +26,32 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class MainActivity extends AppCompatActivity implements OnClickListener {
+public class MainActivity extends AppCompatActivity {
+    String pdfUrl = "http://www.data.jma.go.jp/fcd/yoho/data/jishin/kaisetsu_tanki_latest.pdf";
+    String urlKaisetsu = "https://docs.google.com/gview?embedded=true&url=" + pdfUrl;
+    String urlHimawari = "https://www.jma.go.jp/bosai/map.html#contents=himawari";
+    public String url = urlKaisetsu;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse(pdfUrl));
+        //intent.setType("application/pdf");
+        //intent.setDataAndType(Uri.parse(pdfUrl), "application/pdf");
+        startActivity(intent);
+        //startActivity(Intent.createChooser(intent, "Open file with"));
+
+        //Intent intent = new Intent(this, SubActivity.class);
+        //intent.putExtra("key", "value");
+        //startActivity(intent);
+    }
+}
+/*
+class SubActivity extends AppCompatActivity implements OnClickListener {
 
     public static int reloaded = 0;
     public final int reloadmax = -4;
@@ -257,3 +284,5 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         });
     }
 }
+
+ */
