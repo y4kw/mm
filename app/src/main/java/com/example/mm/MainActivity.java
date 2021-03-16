@@ -118,6 +118,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
 
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                //return super.shouldOverrideUrlLoading(view, url);
                 return false;
             }
 
