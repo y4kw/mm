@@ -69,13 +69,13 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                     CookieSyncManager.createInstance(getApplicationContext());
             cookieSyncMngr.startSync();
             CookieManager cookieManager = CookieManager.getInstance();
-            //cookieManager.removeAllCookie();
-            //cookieManager.removeSessionCookie();
+            cookieManager.removeAllCookie();
+            cookieManager.removeSessionCookie();
             cookieManager.setAcceptCookie(true);
 
             //cookieManager.setAcceptThirdPartyCookies(webview, true);
-            //cookieSyncMngr.stopSync();
-            //cookieSyncMngr.sync();
+            cookieSyncMngr.stopSync();
+            cookieSyncMngr.sync();
         }
 
 
@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         //}
 
         webview.getSettings().setJavaScriptEnabled(true);
-        webview.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+        webview.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
         webview.getSettings().setSupportZoom(true);
         //webview.getSettings().setUseWideViewPort(false);
         //webview.getSettings().setLoadWithOverviewMode(false);
@@ -99,6 +99,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         //webview.setVerticalScrollBarEnabled(true);
         //webview.setHorizontalScrollBarEnabled(true);
         //webview.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+        //webview.getSettings().setUserAgentString("Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:86.0) Gecko/20100101 Firefox/86.0");
+        //webview.getSettings().setUserAgentString("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36 Edg/89.0.774.54");
         log();
         if (savedInstanceState == null) {
             log("savedInstanceState==null");
