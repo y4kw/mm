@@ -55,6 +55,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        webview = (WebView) findViewById(R.id.webView1);
+
         //Toolbar toolbar = findViewById(R.id.toolbar3);
         //setSupportActionBar(toolbar);
         //toolbar.setTitle("caso");
@@ -67,13 +69,15 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                     CookieSyncManager.createInstance(getApplicationContext());
             cookieSyncMngr.startSync();
             CookieManager cookieManager = CookieManager.getInstance();
-            cookieManager.removeAllCookie();
-            cookieManager.removeSessionCookie();
-            cookieSyncMngr.stopSync();
-            cookieSyncMngr.sync();
+            //cookieManager.removeAllCookie();
+            //cookieManager.removeSessionCookie();
+            cookieManager.setAcceptCookie(true);
+
+            //cookieManager.setAcceptThirdPartyCookies(webview, true);
+            //cookieSyncMngr.stopSync();
+            //cookieSyncMngr.sync();
         }
 
-        webview = (WebView) findViewById(R.id.webView1);
 
         //if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.HONEYCOMB){
         //    reloadmax = 0;
@@ -82,23 +86,24 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         //}
 
         webview.getSettings().setJavaScriptEnabled(true);
-        webview.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
+        webview.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
         webview.getSettings().setSupportZoom(true);
-        webview.getSettings().setUseWideViewPort(false);
-        webview.getSettings().setLoadWithOverviewMode(false);
-        webview.setInitialScale(300);
-        webview.getSettings().setBuiltInZoomControls(true);
-        webview.getSettings().setDisplayZoomControls(false);
-        webview.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
-        webview.getSettings().setPluginState(WebSettings.PluginState.ON);
-        //
+        //webview.getSettings().setUseWideViewPort(false);
+        //webview.getSettings().setLoadWithOverviewMode(false);
+        //webview.setInitialScale(300);
+        //webview.getSettings().setBuiltInZoomControls(true);
+        //webview.getSettings().setDisplayZoomControls(false);
+        //webview.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
+        //webview.getSettings().setPluginState(WebSettings.PluginState.ON);
+
         //webview.setVerticalScrollBarEnabled(true);
         //webview.setHorizontalScrollBarEnabled(true);
         //webview.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         log();
         if (savedInstanceState == null) {
             log("savedInstanceState==null");
-            url = urlKaisetsu;
+            //url = urlKaisetsu;
+            url = "https://ifconfig.me";
             webview.loadUrl(url);
         } else {
             log("NOTsavedInstanceState==null");
@@ -119,7 +124,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 //return super.shouldOverrideUrlLoading(view, url);
-                return false;
+                webview.loadUrl(urlHimawari);
+                return true;
             }
 
             @Override
