@@ -26,7 +26,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-/*
+
 public class MainActivity extends AppCompatActivity implements OnClickListener{
     private WebView webview;
     String pdfUrl = "http://www.data.jma.go.jp/fcd/yoho/data/jishin/kaisetsu_tanki_latest.pdf";
@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
         //log();
     }
 }
-*/
+/*
 public class MainActivity extends AppCompatActivity implements OnClickListener {
 
     public static int reloaded = 0;
@@ -336,3 +336,4 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         });
     }
 }
+*/
